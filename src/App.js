@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
+import PackageDetails from './pages/PackageDetails';
+import Vendor from './pages/Vendor';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:category" element={<CategoryPage />} />
+            <Route path="/package" element={<PackageDetails />} />
+            <Route path="/vendor" element={<Vendor />} />
           </Routes>
         </main>
         <footer className="bg-gray-800 text-white py-8">

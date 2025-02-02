@@ -2,25 +2,40 @@ import React, { useState, useEffect } from "react"
 
 const slides = [
   {
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "https://stanburyphotography.co.uk/wp-content/uploads/2018/11/sri-lanka-destination-wedding-photographers-048-1.jpg",
     title: "Plan Your Dream Wedding",
     description: "Discover everything you need for your perfect day",
   },
   {
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "https://www.maheshmannapperuma.lk/images/fullwidth-slide/fullwidth-slide5.jpg",
     title: "Find Trusted Vendors",
     description: "Connect with top-rated wedding professionals",
   },
   {
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "https://www.elmomentoperfecto.com/wp-content/uploads/2017/08/Slide_Wedding_Photographer_Morocco_Marrakech_Aljosa_Petric_2.jpg",
     title: "Inspiration & Ideas",
     description: "Get inspired with the latest wedding trends and styles",
   },
   {
-    image: "/placeholder.svg?height=600&width=1200",
+    image: "https://stanburyphotography.wordpress.com/wp-content/uploads/2018/11/sri-lanka-destination-wedding-photographers-016.jpg",
     title: "Streamline Your Planning",
     description: "Use our tools to make wedding planning a breeze",
   },
+  // {
+  //   image: "https://images.unsplash.com/photo-1522333222514-7da3ab176ebc",
+  //   title: "Celebrate Love in Style",
+  //   description: "Make your big day as unique as your love story",
+  // },
+  // {
+  //   image: "https://images.unsplash.com/photo-1536610070233-650c3dd74bfb",
+  //   title: "Capture Every Moment",
+  //   description: "Cherish your memories with stunning photography",
+  // },
+  // {
+  //   image: "https://images.unsplash.com/photo-1570633400643-8b0ab4c93fc7",
+  //   title: "Elegant Floral Arrangements",
+  //   description: "Enhance your wedding with beautiful blooms",
+  // },
 ]
 
 function Slideshow() {
@@ -57,6 +72,7 @@ function Slideshow() {
     </div>
   )
 }
+
 
 export default Slideshow
 

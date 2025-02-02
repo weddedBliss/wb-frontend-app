@@ -6,7 +6,7 @@ import FeaturedVendors from "../components/FeaturedVendors"
 function Home() {
   return (
     <div className="space-y-12">
-      <section className="bg-rose-50 py-6">
+      <section className="bg-rose-50 py-6 mt-20">
         <div className="container mx-auto px-4">
           <CategoryGrid />
         </div>

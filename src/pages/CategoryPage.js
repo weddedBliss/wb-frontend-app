@@ -1,12 +1,19 @@
-import React, { useState } from "react"
-import { Link, useParams } from "react-router-dom"
-import { ChevronRight } from "lucide-react"
+import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
+import { Rating } from "react-simple-star-rating";
 
 // Mock data for subcategories and packages
 const categoryData = {
   venue: {
     name: "Venue",
-    subcategories: ["All", "Hotels", "Banquet Halls", "Outdoor Venues", "Religious Venues"],
+    subcategories: [
+      "All",
+      "Hotels",
+      "Banquet Halls",
+      "Outdoor Venues",
+      "Religious Venues",
+    ],
     packages: [
       {
         id: 1,
@@ -14,6 +21,7 @@ const categoryData = {
         description: "Elegant ballroom for 200 guests",
         image: "/placeholder.svg?height=300&width=400",
         price: "$5000",
+        rating: 3,
       },
       {
         id: 2,
@@ -21,6 +29,7 @@ const categoryData = {
         description: "Charming countryside venue",
         image: "/placeholder.svg?height=300&width=400",
         price: "$3000",
+        rating: 4.5,
       },
       {
         id: 3,
@@ -28,6 +37,7 @@ const categoryData = {
         description: "Romantic seaside location",
         image: "/placeholder.svg?height=300&width=400",
         price: "$4000",
+        rating: 5,
       },
       {
         id: 4,
@@ -35,12 +45,19 @@ const categoryData = {
         description: "Beautiful outdoor gardens",
         image: "/placeholder.svg?height=300&width=400",
         price: "$3500",
+        rating: 2.5,
       },
     ],
   },
   "attire-and-beauty": {
     name: "Attire & Beauty",
-    subcategories: ["All", "Bridal Gowns", "Groom Suits", "Bridesmaid Dresses", "Makeup & Hair"],
+    subcategories: [
+      "All",
+      "Bridal Gowns",
+      "Groom Suits",
+      "Bridesmaid Dresses",
+      "Makeup & Hair",
+    ],
     packages: [
       {
         id: 1,
@@ -73,12 +90,21 @@ const categoryData = {
     ],
   },
   // Add more categories as needed
-}
+};
 
 function CategoryPage() {
-  const { category } = useParams()
-  const [activeSubcategory, setActiveSubcategory] = useState("All")
-  const categoryInfo = categoryData[category]
+  const { category } = useParams();
+  const [activeSubcategory, setActiveSubcategory] = useState("All");
+  const categoryInfo = categoryData[category];
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (rate) => {
+    setRating(rate);
+
+    // other logic
+  };
+
+  const onPointerMove = (value, index) => console.log(value, index);
 
   if (!categoryInfo) {
     return (
@@ -89,7 +115,7 @@ function CategoryPage() {
           Return to Home
         </Link>
       </div>
-    )
+    );
   }
 
   return (
@@ -104,7 +130,9 @@ function CategoryPage() {
           <li>
             <div className="flex items-center">
               <ChevronRight className="w-5 h-5 text-gray-400" />
-              <span className="ml-1 text-gray-500 md:ml-2 font-medium">{categoryInfo.name}</span>
+              <span className="ml-1 text-gray-500 md:ml-2 font-medium">
+                {categoryInfo.name}
+              </span>
             </div>
           </li>
         </ol>
@@ -118,7 +146,9 @@ function CategoryPage() {
             key={subcat}
             onClick={() => setActiveSubcategory(subcat)}
             className={`px-4 py-2 rounded-full text-sm font-medium ${
-              activeSubcategory === subcat ? "bg-rose-500 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              activeSubcategory === subcat
+                ? "bg-rose-500 text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
             }`}
           >
             {subcat}
@@ -128,24 +158,46 @@ function CategoryPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {categoryInfo.packages.map((pkg) => (
-          <div key={pkg.id} className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={pkg.image || "/placeholder.svg"} alt={pkg.title} className="w-full h-48 object-cover" />
-            <div className="p-6">
-              <h3 className="font-bold text-xl mb-2">{pkg.title}</h3>
-              <p className="text-gray-600 mb-4">{pkg.description}</p>
-              <div className="flex justify-between items-center">
-                <span className="text-rose-500 font-bold">{pkg.price}</span>
-                <button className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded transition duration-300">
-                  View Details
-                </button>
+          <Link key={pkg.title} to={`/${pkg.title}`}>
+            <div
+              key={pkg.id}
+              className="bg-white rounded-lg shadow-md overflow-hidden"
+            >
+              <img
+                src={pkg.image || "/placeholder.svg"}
+                alt={pkg.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="font-bold text-xl mb-2">{pkg.title}</h3>
+                <p className="text-gray-600 mb-4">{pkg.description}</p>
+
+                <Rating
+                  onClick={handleRating}
+                  onPointerEnter={null}
+                  onPointerLeave={null}
+                  onPointerMove={onPointerMove}
+                  SVGstyle={{ display: "inline" }}
+                />
+                {/* <span className="text-gray-500 ml-2">
+                  {pkg.rating || 0} / 5
+                </span> */}
+
+                <div className="flex justify-between items-center">
+                  <span className="text-rose-500 font-bold">
+                    Starting from {pkg.price}
+                  </span>
+                  <button className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                    View Details
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default CategoryPage
-
+export default CategoryPage;

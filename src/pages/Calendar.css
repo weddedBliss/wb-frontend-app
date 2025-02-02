@@ -1,0 +1,50 @@
+/* Calendar.css */
+
+/* Styling the calendar container */
+.react-calendar {
+  border-radius: 8px;
+  background-color: #ffffff; /* White background */
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling the calendar tile (each date) */
+.react-calendar__tile {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect on calendar tiles */
+.react-calendar__tile:hover {
+  background-color: #4f46e5; /* Blue background on hover */
+  color: white;
+}
+
+/* Active date (selected day) */
+.react-calendar__tile--active {
+  background-color: #6366f1; /* Purple background */
+  color: white;
+}
+
+/* Disabled dates */
+.react-calendar__tile--disabled {
+  color: #cbd5e1;
+  background-color: #f3f4f6;
+}
+
+/* Styling the header (month and year) */
+.react-calendar__navigation button {
+  background-color: transparent;
+  color: #333;
+  font-size: 16px;
+  padding: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Navigation buttons on hover */
+.react-calendar__navigation button:hover {
+  background-color: #e5e7eb;
+}
