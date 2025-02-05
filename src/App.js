@@ -5,6 +5,10 @@ import Home from './pages/Home';
 import CategoryPage from './pages/CategoryPage';
 import PackageDetails from './pages/PackageDetails';
 import Vendor from './pages/Vendor';
+import VendorProfile from './pages/VendorProfile';
+import BusinessRegistration from './pages/BusinessRegistration';
+import SelectPlan from './pages/SelectPlan';
+import SettingsPage from './pages/Settings';
 
 function App() {
   return (
@@ -15,8 +19,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:category" element={<CategoryPage />} />
-            <Route path="/package" element={<PackageDetails />} />
+            <Route path="/package/:id" element={<PackageDetails />} />
             <Route path="/vendor" element={<Vendor />} />
+            <Route path="/vendorp" element={<VendorProfile />} />
+            <Route path="/business" element={<BusinessRegistration />} />
+            <Route path="/plan" element={<SelectPlan/>} />
+            <Route path="/settings" element={<SettingsPage/>} />
           </Routes>
         </main>
         <footer className="bg-gray-800 text-white py-8">

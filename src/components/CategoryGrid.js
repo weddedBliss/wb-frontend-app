@@ -126,22 +126,22 @@ const categories = [
     bgImage:
       "url('https://images.unsplash.com/photo-1602002418816-5c0aeef426aa?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
   },
-  {
-    name: "Other",
-    icon: HelpCircle,
-    slug: "florists",
-    bgImage:
-      "url('https://images.unsplash.com/photo-1519307212971-dd9561667ffb?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-  },
+  // {
+  //   name: "Other",
+  //   icon: HelpCircle,
+  //   slug: "florists",
+  //   bgImage:
+  //     "url('https://images.unsplash.com/photo-1519307212971-dd9561667ffb?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+  // },
 ];
 
 function CategoryGrid() {
   return (
-    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
       {categories.map((category) => (
         <Link key={category.slug} to={`/${category.slug}`}>
           <div
-            className="flex flex-col items-center justify-center p-3 bg-cover bg-center rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer group"
+            className="flex flex-col items-center justify-center p-3 sm:p-4 bg-cover bg-center rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer group h-36 sm:h-44 md:h-48 lg:h-56"
             style={{
               backgroundImage: `${category.bgImage}, linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2)), linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6))`,
               backgroundBlendMode: "overlay",
@@ -149,10 +149,10 @@ function CategoryGrid() {
           >
             {React.createElement(category.icon, {
               className:
-                "h-8 w-8 text-white group-hover:text-rose-300 transition duration-300 mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]",
+                "h-8 sm:h-10 w-8 sm:w-10 text-white group-hover:text-rose-300 transition duration-300 mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]",
             })}
             <span
-              className="text-xs font-medium text-white group-hover:text-rose-200 text-center transition duration-300"
+              className="text-xs sm:text-sm font-medium text-white group-hover:text-rose-200 text-center transition duration-300"
               style={{
                 textShadow: "0 2px 4px rgba(0, 0, 0, 0.4)",
               }}

@@ -19,7 +19,8 @@ const categoryData = {
         id: 1,
         title: "Luxury Hotel Package",
         description: "Elegant ballroom for 200 guests",
-        image: "/placeholder.svg?height=300&width=400",
+        image:
+          "https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?q=80&w=1920&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: "$5000",
         rating: 3,
       },
@@ -27,7 +28,8 @@ const categoryData = {
         id: 2,
         title: "Rustic Barn Wedding",
         description: "Charming countryside venue",
-        image: "/placeholder.svg?height=300&width=400",
+        image:
+          "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: "$3000",
         rating: 4.5,
       },
@@ -35,7 +37,8 @@ const categoryData = {
         id: 3,
         title: "Beachfront Ceremony",
         description: "Romantic seaside location",
-        image: "/placeholder.svg?height=300&width=400",
+        image:
+          "https://images.unsplash.com/photo-1564501049412-61c2a3083791?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D0",
         price: "$4000",
         rating: 5,
       },
@@ -43,7 +46,8 @@ const categoryData = {
         id: 4,
         title: "Garden Party Venue",
         description: "Beautiful outdoor gardens",
-        image: "/placeholder.svg?height=300&width=400",
+        image:
+          "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         price: "$3500",
         rating: 2.5,
       },
@@ -119,7 +123,7 @@ function CategoryPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 mt-14">
       <nav className="flex mb-8" aria-label="Breadcrumb">
         <ol className="inline-flex items-center space-x-1 md:space-x-3">
           <li className="inline-flex items-center">
@@ -173,11 +177,17 @@ function CategoryPage() {
                 <p className="text-gray-600 mb-4">{pkg.description}</p>
 
                 <Rating
-                  onClick={handleRating}
+                  initialValue={4}
+                  readonly
+                  onClick={null}
                   onPointerEnter={null}
                   onPointerLeave={null}
                   onPointerMove={onPointerMove}
-                  SVGstyle={{ display: "inline" }}
+                  SVGstyle={{
+                    display: "inline",
+                    width: "25px",
+                    height: "25px",
+                  }}
                 />
                 {/* <span className="text-gray-500 ml-2">
                   {pkg.rating || 0} / 5
@@ -187,9 +197,12 @@ function CategoryPage() {
                   <span className="text-rose-500 font-bold">
                     Starting from {pkg.price}
                   </span>
-                  <button className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                  <Link
+                    to={`/package/${pkg.id}`}
+                    className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2 px-4 rounded transition duration-300"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -16,7 +16,8 @@ function Header() {
   const [searchHint, setSearchHint] = useState(searchHints[0]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+  const [isBusinessRegistered, setIsBusinessRegistered] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
@@ -94,14 +95,19 @@ function Header() {
                   <User className="h-5 w-5 text-gray-700" />
                   <span className="text-gray-700 font-medium">John Doe</span>
                 </button>
-
                 {isDropdownOpen && (
                   <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md">
                     <Link
                       to="/profile"
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
                     >
-                      Profile
+                      Settings
+                    </Link>
+                    <Link
+                      to="/profile"
+                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                    >
+                      Register Business
                     </Link>
                     <button
                       onClick={handleLogout}
