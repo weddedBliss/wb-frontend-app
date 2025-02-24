@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, User } from "lucide-react";
+import { Search, User, Settings, Building, Home, LogOut } from "lucide-react";
 import LoginDialog from "./LoginDialog";
 import SignupDialog from "./SignUpDialog";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useAuth } from "../context/AuthContext";
 
 const searchHints = [
   "Search for venues...",
@@ -16,19 +18,13 @@ function Header() {
   const [searchHint, setSearchHint] = useState(searchHints[0]);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
   const [isBusinessRegistered, setIsBusinessRegistered] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { userDetails, isUserLoggedIn, logoutUser } = useAuth();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSearchHint(
-        searchHints[Math.floor(Math.random() * searchHints.length)]
-      );
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
+    console.log("Updated userDetails:", userDetails);
+  }, [userDetails]);
 
   const toggleLoginDialog = () => {
     setIsLoginOpen(!isLoginOpen);
@@ -43,7 +39,8 @@ function Header() {
   };
 
   const handleLogout = () => {
-    setIsUserLoggedIn(false);
+    localStorage.removeItem("token");
+    logoutUser();
   };
 
   return (
@@ -87,37 +84,80 @@ function Header() {
                 </button>
               </>
             ) : (
-              <div className="relative">
-                <button
-                  onClick={toggleDropdown}
-                  className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition duration-300"
+              <DropdownMenu.Root>
+                {/* Button to open dropdown */}
+                <DropdownMenu.Trigger asChild>
+                  <button className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full transition duration-300">
+                    <User className="h-5 w-5 text-gray-700" />
+                    {userDetails && (
+                      <span className="text-gray-700 font-medium">
+                        {userDetails.firstName}
+                      </span>
+                    )}
+                  </button>
+                </DropdownMenu.Trigger>
+
+                {/* Dropdown content */}
+                <DropdownMenu.Content
+                  className="absolute right-0 mt-2 pt-3 w-40 bg-white border border-gray-200 shadow-md rounded-md"
+                  align="end"
                 >
-                  <User className="h-5 w-5 text-gray-700" />
-                  <span className="text-gray-700 font-medium">John Doe</span>
-                </button>
-                {isDropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 shadow-md rounded-md">
+                  <DropdownMenu.Item asChild>
+                    <Link
+                      to="/"
+                      className="flex px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
+                    >
+                      {/* <Home className="h-5 w-5 text-gray-700" /> */}
+                      Home
+                    </Link>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item asChild>
                     <Link
                       to="/profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      className="flex px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
                     >
+                      {/* <Settings className="h-5 w-5 text-gray-700" /> */}
                       Settings
                     </Link>
-                    <Link
-                      to="/profile"
-                      className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-                    >
-                      Register Business
-                    </Link>
+                  </DropdownMenu.Item>
+                  {userDetails &&
+                    userDetails.accountType === "business" &&
+                    !userDetails.businessRegistered && (
+                      <DropdownMenu.Item asChild>
+                        <Link
+                          to="/business-register"
+                          className="flex px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        >
+                          {/* <Building className="h-5 w-5 text-gray-700" /> */}
+                          Register Business
+                        </Link>
+                      </DropdownMenu.Item>
+                    )}
+
+                  {userDetails &&
+                    userDetails.accountType === "business" &&
+                    userDetails.businessRegistered && (
+                      <DropdownMenu.Item asChild>
+                        <Link
+                          to="/vendor"
+                          className="flex px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
+                        >
+                          {/* <Building className="h-5 w-5 text-gray-700" /> */}
+                          Business Dashboard
+                        </Link>
+                      </DropdownMenu.Item>
+                    )}
+
+                  <DropdownMenu.Item asChild>
                     <button
                       onClick={handleLogout}
-                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                      className="w-full text-left px-4 py-2 text-red-700 hover:bg-red-100 cursor-pointer"
                     >
                       Logout
                     </button>
-                  </div>
-                )}
-              </div>
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
             )}
           </div>
         </div>

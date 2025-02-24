@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import VendorDashboard from "./VendorDashboard";
+import VendorPackages from "./VendorPackages";
 
 const Vendor = () => {
   const [selectedTab, setSelectedTab] = useState("dashboard");
@@ -9,11 +10,11 @@ const Vendor = () => {
     switch (selectedTab) {
       case "dashboard":
         return <VendorDashboard />;
-      case "orders":
-        return <h1 className="text-2xl font-bold">Manage Your Orders Here</h1>;
-      case "messages":
+      case "packages":
+        return <VendorPackages />;
+      case "bookings":
         return <h1 className="text-2xl font-bold">View Customer Messages</h1>;
-      case "profile":
+      case "notifications":
         return <h1 className="text-2xl font-bold">Edit Your Vendor Profile</h1>;
       case "settings":
         return <h1 className="text-2xl font-bold">Account Settings</h1>;

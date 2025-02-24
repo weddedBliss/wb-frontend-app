@@ -139,7 +139,7 @@ function CategoryGrid() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
       {categories.map((category) => (
-        <Link key={category.slug} to={`/${category.slug}`}>
+        <Link key={category.slug} to={`/category/${category.slug}`}>
           <div
             className="flex flex-col items-center justify-center p-3 sm:p-4 bg-cover bg-center rounded-lg shadow-sm hover:shadow-md transition duration-300 cursor-pointer group h-36 sm:h-44 md:h-48 lg:h-56"
             style={{
